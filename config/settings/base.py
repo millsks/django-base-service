@@ -47,10 +47,10 @@ LOCALE_PATHS = [str(BASE_DIR / "locale")]
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 DATABASES = {
-    "default": env.db(
-        "DATABASE_URL",
-        default="postgres:///django_base_service",
-    ),
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": Path.home() / ".data_sources/django-base-service/db.sqlite3",
+    }
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 # https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
@@ -95,6 +95,8 @@ LOCAL_APPS = [
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+
+SITE_ID = 1
 
 # MIGRATIONS
 # ------------------------------------------------------------------------------

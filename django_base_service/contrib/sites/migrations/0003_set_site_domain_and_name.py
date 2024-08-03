@@ -18,20 +18,33 @@ def _update_or_create_site_with_sequence(site_model, connection, domain, name):
     )
     if created:
         # We provided the ID explicitly when creating the Site entry, therefore the DB
-        # sequence to auto-generate them wasn't used and is now out of sync. If we
+        # sequence to auto-generate IDs wasn't used and is now out of sync. If we
         # don't do anything, we'll get a unique constraint violation the next time a
         # site is created.
         # To avoid this, we need to manually update DB sequence and make sure it's
         # greater than the maximum value.
-        max_id = site_model.objects.order_by("-id").first().id
+        max_id = site_model.objects.order_by('-id').first().id
+
         with connection.cursor() as cursor:
-            cursor.execute("SELECT last_value from django_site_id_seq")
-            (current_id,) = cursor.fetchone()
-            if current_id <= max_id:
-                cursor.execute(
-                    "alter sequence django_site_id_seq restart with %s",
-                    [max_id + 1],
-                )
+            if connection.vendor == "postgresql":
+                cursor.execute("SELECT last_value from django_site_id_seq")
+                (current_id,) = cursor.fetchone()
+                if current_id <= max_id:
+                    cursor.execute(
+                        "ALTER SEQUENCE django_site_id_seq RESTART WITH %s",
+                        [max_id + 1],
+                    )
+            elif connection.vendor == "sqlite":
+                cursor.execute("SELECT MAX(id) FROM django_site")
+                current_id = cursor.fetchone()[0] or 0
+                if current_id <= max_id:
+                    try:
+                        cursor.execute("INSERT INTO django_site (id, domain, name) VALUES (?, 'temp', 'temp')",
+                                       (max_id + 1,))
+                    except Exception:
+                        pass
+                    finally:
+                        cursor.execute("DELETE FROM django_site WHERE domain='temp' AND name='temp'")
 
 
 def update_site_forward(apps, schema_editor):

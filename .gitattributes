@@ -1,1 +1,3 @@
 * text=auto
+*.sqlite binary
+*.sqlite3 binary
