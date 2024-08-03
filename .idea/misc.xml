@@ -6,5 +6,5 @@
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="ES6" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12.4 WSL (Ubuntu): (/home/millsks/UserLocal/src/code/Public-Git/millsks/django-base-service/venv/bin/python3)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (django-base-service)" project-jdk-type="Python SDK" />
 </project>
