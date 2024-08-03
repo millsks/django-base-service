@@ -1,0 +1,38 @@
+{
+  "template": "https://github.com/cookiecutter/cookiecutter-django",
+  "commit": "a2b1055e16fc286b182366a17bc98463574da948",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "project_name": "django-base-service",
+      "project_slug": "django_base_service",
+      "description": "A base django service generated from the standard cookiecutter-django template.",
+      "author_name": "Kevin Samuel Mills",
+      "domain_name": "localhost",
+      "email": "millsks@gmail.com",
+      "version": "2024.08",
+      "open_source_license": "Apache Software License 2.0",
+      "username_type": "username",
+      "timezone": "UTC",
+      "windows": "n",
+      "editor": "PyCharm",
+      "use_docker": "n",
+      "postgresql_version": "16",
+      "cloud_provider": "None",
+      "mail_service": "Other SMTP",
+      "use_async": "n",
+      "use_drf": "y",
+      "frontend_pipeline": "None",
+      "use_celery": "n",
+      "use_mailpit": "n",
+      "use_sentry": "n",
+      "use_whitenoise": "y",
+      "use_heroku": "n",
+      "ci_tool": "Github",
+      "keep_local_envs_in_vcs": "y",
+      "debug": "y",
+      "_template": "https://github.com/cookiecutter/cookiecutter-django"
+    }
+  },
+  "directory": null
+}
