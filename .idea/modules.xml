@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../django-site-styler-admin/.idea/django-site-styler-admin.iml" filepath="$PROJECT_DIR$/../django-site-styler-admin/.idea/django-site-styler-admin.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/django_base_service.iml" filepath="$PROJECT_DIR$/.idea/django_base_service.iml" />
     </modules>
   </component>

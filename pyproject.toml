@@ -146,15 +146,15 @@ ignore = [
   "S101", # Use of assert detected https://docs.astral.sh/ruff/rules/assert/
   "RUF012", # Mutable class attributes should be annotated with `typing.ClassVar`
   "SIM102", # sometimes it's better to nest
-  "UP038" # Checks for uses of isinstance/issubclass that take a tuple 
+  "UP038" # Checks for uses of isinstance/issubclass that take a tuple
           # of types for comparison.
-          # Deactivated because it can make the code slow: 
+          # Deactivated because it can make the code slow:
           # https://github.com/astral-sh/ruff/issues/7871
 ]
 # Allow fix for all enabled rules (when `--fix`) is provided.
 fixable = ["ALL"]
 unfixable = []
-# The fixes in extend-unsafe-fixes will require 
+# The fixes in extend-unsafe-fixes will require
 # provide the `--unsafe-fixes` flag when fixing.
 extend-unsafe-fixes = [
     "UP038"
@@ -170,3 +170,86 @@ line-ending = "auto"
 
 [tool.ruff.lint.isort]
 force-single-line = true
+
+[build-system]
+requires = ["setuptools>=42", "wheel", "setuptools_scm[toml]>=6.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+version_scheme = "guess-next-dev"
+local_scheme = "node-and-date"
+
+[tool.setuptools]
+packages = { find = {} }
+
+[project]
+name = "django-base-service"
+description = "A base django service generated from the standard cookiecutter-django template."
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "Apache 2.0"}
+authors = [
+    {name = "Kevin Mills", email = "millsks@gmail.com"}
+]
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Framework :: Django",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12"
+]
+dynamic = ["version"]
+dependencies = [
+    # Django
+    "django>=4.2,<5.0",  # pyup: < 5.0  # https://www.djangoproject.com/
+    "django-environ==0.11.2",  # https://github.com/joke2k/django-environ
+    "django-model-utils==4.5.1",  # https://github.com/jazzband/django-model-utils
+    "django-allauth[mfa]==64.0.0",  # https://github.com/pennersr/django-allauth
+    # WhiteNoise - static file serving
+    "whitenoise==6.7.0",  # https://github.com/evansd/whitenoise
+    "gunicorn==22.0.0",  # https://github.com/benoitc/gunicorn
+    "psycopg[binary]==3.2.1",  # https://github.com/psycopg/psycopg
+]
+
+[project.optional-dependencies]
+local = [
+    "pip >=24.2",
+    "build",
+    "cookiecutter",
+    "cruft",
+    "django-debug-toolbar >=4.4.2",
+    "mypy",
+    "pre-commit",
+    "pre-commit-hooks",
+    "pytest",
+    "pytest-asyncio",
+    "pytest-cov",
+    "pytest-django",
+    "pytest-env",
+    "pytest-html",
+    "pytest-mock",
+    "pytest-pythonpath",
+    "pytest-timeout",
+    "pytest-watch",
+    "pytest-xdist",
+    "ruff",
+    "towncrier"
+]
+
+[project.urls]
+Homepage = "https://github.com/millsks/django-base-service"
+Issues = "https://github.com/millsks/django-base-service/issues"
+Documentation = "https://github.com/millsks/django-base-service"
+Repository = "https://github.com/millsks/django-base-service.git"
+Changelog = "https://github.com/millsks/django-base-service/blob/master/CHANGELOG.md"
+
+[tool.towncrier]
+name = "django-base-service"
+package = "django_base_service"
+filename = "CHANGELOG.md"
+directory = "changelog.d"
+date_format = "%Y-%m-%d"
